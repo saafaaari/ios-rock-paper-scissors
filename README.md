@@ -50,6 +50,46 @@
 
 
 ## PR 후 개선사항
+- Result타입에 printMessage()함수를 두어 케이스를 나눠 출력하는 부분을 험수 하나로 통합
+> ```swift
+> //전
+> case Result.win:
+>     print("이겼습니다.")
+>     print("게임 종료")
+> ```
+   
+> ```swift
+> //후
+> case Result.win:
+>     Result.win.printMessage()
+>     print("게임 종료")
+>```
+
+- 패의 승패를 결정해주는 함수 compareEachCard()를 전역에서 Card타입 내부로 이동
+> ```swift
+> //전
+>func compareEachCard(userCard: Int, computerCard: Int) -> Result {
+>    if userCard == computerCard {
+>        return Result.draw
+>    ...
+>}
+> ```
+   
+> ```swift
+> //후
+>enum Card: String, CaseIterable {
+>    case scissors = "1"
+>    case rock = "2"
+>    case paper = "3"
+>    static let cases: [Card] = Card.allCases
+>    
+>    func compareEachCard(computerCard: Card) -> Result {
+>        let winCase = [[Card.scissors, Card.paper],[Card.rock, Card.scissors],[Card.paper, Card.rock]]
+>        let cardPair = [self, computerCard]
+>        ...
+>    }
+>}
+>```
 
 ## STEP 2 순서도
 <img src = "https://user-images.githubusercontent.com/91936941/154185828-6e5d68f6-233b-4956-b263-cdef49ab2379.png" width="500px">
