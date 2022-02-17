@@ -73,6 +73,7 @@
 >        return Result.draw
 >    ...
 >}
+>printResult(gameResult: compareEachCard(userCard: userCard, computerCard: computerCard))
 > ```
    
 > ```swift
@@ -89,6 +90,7 @@
 >        ...
 >    }
 >}
+>printResult(gameResult: userCard.compareEachCard(computerCard: computerCard))
 >```
 
 ## STEP 2 순서도
